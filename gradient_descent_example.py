@@ -11,14 +11,14 @@ class grad():
         self.yrange = yrange
         self.fun = fun
         self.data2d = np.array([0,1,2,3,4,5,6,8,9,10,8,9,5.5,6,5,4,3.5,2,1,1,]).reshape(2,10)
-    def gen_terain(self):
+    def gen_terain(self): 
         self.x = np.arange(-self.xrange,self.xrange,self.rez)
         self.y = np.arange(-self.yrange,self.yrange,self.rez)
         X,Y = np.meshgrid(self.x,self.y)
         self.X = X
         self.Y = Y
         self.Z = eval(self.fun)
-    def plot_surface(self,grad= -1):
+    def plot_surface(self,grad= -1): #will plot surface and show path of gradient descend
         if type(grad) != int:
             surf = go.Figure()
             for i in range(self.amount_of_points):
@@ -27,7 +27,7 @@ class grad():
         else:
             surf = go.Figure(go.Surface(x = self.x,y=self.y,z= self.Z))
         surf.show()
-    def find_grad(self, p,shift):
+    def find_grad(self, p,shift): #calculates the gradiant at point p numericaly, lower values of shift are typicaly better
         X = p[0]
         Y = p[1]
         Z= eval(self.fun)
@@ -46,15 +46,15 @@ class grad():
         Y_down = (y_down-Z)/shift
         dx = min([X_up,X_down])
         dy = min([Y_up,Y_down])
-        return np.array([dx,dy,Z])
+        return np.array([dx,dy,Z]) #also returns Z for optimalisation reason later in the program
     def descent(self,shift = 0.0000001, p= -1,amount_of_points = 1):
         self.amount_of_points = amount_of_points
         spoints = []
         for i in range(amount_of_points):
             points = np.array([])
-            if type(p) == int or i>0:
-                px= np.random.rand()*self.xrange*((-1)**np.random.randint(0,3))
-                py= np.random.rand()*self.yrange*((-1)**np.random.randint(0,3))
+            if type(p) == int or i>0:  #picks random starting point if no starting point was given
+                px= np.random.rand()*self.xrange*((-1)**np.random.randint(0,2))
+                py= np.random.rand()*self.yrange*((-1)**np.random.randint(0,2))
                 p = np.array([px,py])
             for x in range(self.eta):
                 a = self.find_grad(p,shift)
@@ -76,9 +76,9 @@ class grad():
             for x in range(len(W)): #a cookie for someone who can do this without a for loop  
                 cost = sum(((self.data2d[0,:] -(self.data2d[1,:]*W[x] + B[x]))**2))/len(self.data2d[1,:])  
                 Z = np.append(Z,cost)
-            Z = Z.reshape(len(w[0]),len(w[0]))
+            Z = Z.reshape(len(w[0]),len(w[0])) 
             return Z
-    def plotgraph(self):
+    def plotgraph(self):  #doesnt work when using multiple starting points 
         x = np.arange(0,10,0.1)
         fig= go.Figure()
         fig.add_trace(go.Scatter(x = self.data2d[0,:],y = self.data2d[1,:], mode = 'markers'))
@@ -90,8 +90,8 @@ class grad():
 
         
 
-fitting_line = grad(10,0.01,0.1,10,10,'self.example_cost_function(X,Y)')
-fitting_line.gen_terain() 
+fitting_line = grad(10,0.01,0.1,10,10,'self.example_cost_function(X,Y)') #doesnt like if when you have a different range for x and y 
+fitting_line.gen_terain()                                                #still needs to be upgraded to be able to handle that
 fitting_line.descent(p = np.array([-8,8]))
 fitting_line.plotgraph()
 
