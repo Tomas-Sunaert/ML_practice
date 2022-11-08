@@ -1,3 +1,3 @@
-# myml
-fun.git
-this was fun ;)
+#ML_practice
+repository for practice problems related to ML
+
