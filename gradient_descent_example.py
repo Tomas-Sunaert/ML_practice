@@ -103,3 +103,6 @@ high_alpha = grad(20,1.02,0.1,10,10,'(X**2 + Y**2)')
 high_alpha.gen_terain()
 high_alpha.descent(p = np.array([3,2]))
 
+local = grad(500,0.003, 0.05,10,10,'(X**2 + Y**2) + 200/((1+(abs(X+Y))))+ 10*Y')
+local.gen_terain()
+local.descent(amount_of_points= 5)
