@@ -10,7 +10,7 @@ class grad():
         self.xrange = xrange
         self.yrange = yrange
         self.fun = fun
-        self.data2d = np.array([0,1,2,3,4,5,6,8,9,10,8,9,5.5,6,5,4,3.5,2,1,1,]).reshape(2,10)
+        self.data2d = np.array([0,1,2,3,4,7,6,8,9,10,8,9,10.5,6,5,4,-20,2,213,1,]).reshape(2,10)
     def gen_terain(self): 
         self.x = np.arange(-self.xrange,self.xrange,self.rez)
         self.y = np.arange(-self.yrange,self.yrange,self.rez)
@@ -99,7 +99,7 @@ local_min = grad(500,0.003, 0.05,10,10,'(X**2 + Y**2) - 5*np.sin(X**2) + np.cos(
 local_min.gen_terain()
 local_min.descent(amount_of_points= 5)
 
-high_alpha = grad(20,1.02,0.1,10,10,'(X**2 + Y**2)')
+high_alpha = grad(20,0.01,0.1,10,10,'(X**2 + Y**2)')
 high_alpha.gen_terain()
 high_alpha.descent(p = np.array([3,2]))
 
