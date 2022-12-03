@@ -10,7 +10,7 @@ class grad():
         self.xrange = xrange
         self.yrange = yrange
         self.fun = fun
-        self.data2d = np.array([0,1,2,3,4,7,6,8,9,10,8,9,10.5,6,5,4,-20,2,213,1,]).reshape(2,10)
+        self.data2d = np.array([0,1,2,3,4,7,6,8,9,10,8,9,10.5,6,5,4,2,2,13,1,]).reshape(2,10)
     def gen_terain(self): 
         self.x = np.arange(-self.xrange,self.xrange,self.rez)
         self.y = np.arange(-self.yrange,self.yrange,self.rez)
